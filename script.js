@@ -44,6 +44,7 @@ async function getPhotos() {
 	try {
 		const response = await fetch(apiUrl);
 		photosArray = await response.json();
+		totalImages = photosArray.length;
 		displayPhotos(photosArray);
 	} catch (error) {
 		alert(error.message);
@@ -52,10 +53,7 @@ async function getPhotos() {
 
 //CHECK IF SCROLLING IS NEAR TO THE BOTTOM OF THE PAGE AND LEAD MORE PHOTOS
 window.addEventListener('scroll', () => {
-	if (
-		window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 &&
-		ready
-	) {
+	if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && ready) {
 		ready = false;
 		getPhotos();
 	}
